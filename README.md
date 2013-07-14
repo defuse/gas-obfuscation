@@ -7,7 +7,7 @@ disassemblers like IDA Pro. It is very inefficient, making simple code about 2x
 slower.
 
 How It Works
-===============
+----------------
 
 The script inserts a byte sequence before each instruction in the file. The byte
 sequences are designed to confuse the disassembler. For example, the instruction
