@@ -46,8 +46,10 @@ lines.each do |line|
     output << line
   elsif /^*.*\s=\s.*$/ =~ line
     # it's something like "Lset9 = Ltmp2-Leh_func_begin2" ignore it
+    output << line
   elsif /^\s*$/ =~ line
     # blank line, ignore it
+    output << line
   else 
     # it's an instruction (i think!), so insert obfuscator
     obf = OBFUSCATORS[rand(OBFUSCATORS.length)]
