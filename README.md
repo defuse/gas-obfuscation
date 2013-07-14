@@ -39,60 +39,80 @@ Example Output
 
 ### Obfuscated
 
-    40066c:       eb 01                   jmp    40066f <main+0x3>
-    40066e:       05 55 eb 01 05          add    eax,0x501eb55
-    400673:       48 89 e5                mov    rbp,rsp
-    400676:       eb 02                   jmp    40067a <main+0xe>
-    400678:       81 c3 48 83 ec 20       add    ebx,0x20ec8348
-    40067e:       eb 01                   jmp    400681 <main+0x15>
-    400680:       05 89 7d ec eb          add    eax,0xebec7d89
-    400685:       01 0d 48 89 75 e0       add    DWORD PTR [rip+0xffffffffe0758948],ecx        # ffffffffe0b58fd3 <_end+0xffffffffe05584c3
-    
-    40068b:       eb 01                   jmp    40068e <main+0x22>
-    40068d:       31 c7                   xor    edi,eax
-    40068f:       45 fc                   rex.RB cld    
-    400691:       2f                      (bad)  
-    400692:       d3 23                   shl    DWORD PTR [rbx],cl
-    400694:       00 eb                   add    bl,ch
-    400696:       01 0d 8b 45 fc eb       add    DWORD PTR [rip+0xffffffffebfc458b],ecx        # ffffffffec3c4c27 <_end+0xffffffffebdc4117>
-    40069c:       01 31                   add    DWORD PTR [rcx],esi
-    40069e:       89 c7                   mov    edi,eax
-    4006a0:       eb 01                   jmp    4006a3 <main+0x37>
-    4006a2:       f7 e8                   imul   eax
-    4006a4:       3c fe                   cmp    al,0xfe
-    4006a6:       ff                      (bad)  
-    4006a7:       ff eb                   jmp    <internal disassembler error>
-    4006a9:       01 f7                   add    edi,esi
-    4006ab:       89 45 fc                mov    DWORD PTR [rbp-0x4],eax
-    4006ae:       eb 01                   jmp    4006b1 <main+0x45>
-    4006b0:       05 b8 0c 08 40          add    eax,0x40080cb8
-    4006b5:       00 eb                   add    bl,ch
-    4006b7:       01 0d 8b 55 fc eb       add    DWORD PTR [rip+0xffffffffebfc558b],ecx        # ffffffffec3c5c48 <_end+0xffffffffebdc5138>
-    4006bd:       01 31                   add    DWORD PTR [rcx],esi
-    4006bf:       89 d6                   mov    esi,edx
-    4006c1:       eb 01                   jmp    4006c4 <main+0x58>
-    4006c3:       05 48 89 c7 eb          add    eax,0xebc78948
-    4006c8:       01 05 b8 00 00 00       add    DWORD PTR [rip+0xb8],eax        # 400786 <__libc_csu_init+0x56>
-    4006ce:       00 eb                   add    bl,ch
-    4006d0:       02 81 c3 e8 08 fd       add    al,BYTE PTR [rcx-0x2f7173d]
-    4006d6:       ff                      (bad)  
-    4006d7:       ff eb                   jmp    <internal disassembler error>
-    4006d9:       02 81 c3 83 45 fc       add    al,BYTE PTR [rcx-0x3ba7c3d]
-    4006df:       04 eb                   add    al,0xeb
-    4006e1:       01 05 b8 1e 08 40       add    DWORD PTR [rip+0x40081eb8],eax        # 4048259f <_end+0x3fe81a8f>
-    4006e7:       00 eb                   add    bl,ch
-    4006e9:       02 81 c3 8b 55 fc       add    al,BYTE PTR [rcx-0x3aa743d]
-    4006ef:       eb 01                   jmp    4006f2 <main+0x86>
-    4006f1:       f7                      (bad)  
-    4006f2:       89 d6                   mov    esi,edx
-    4006f4:       eb 01                   jmp    4006f7 <main+0x8b>
-    4006f6:       31 48 89                xor    DWORD PTR [rax-0x77],ecx
-    4006f9:       c7                      (bad)  
-    4006fa:       eb 01                   jmp    4006fd <main+0x91>
-    4006fc:       05 b8 00 00 00          add    eax,0xb8
-    400701:       00 eb                   add    bl,ch
-    400703:       01 f7                   add    edi,esi
-    400705:       e8 d6 fc ff ff          call   4003e0 <printf@plt>
-    40070a:       eb 01                   jmp    40070d <main+0xa1>
-    40070c:       0d c9 eb 01 0d          or     eax,0xd01ebc9
-    400711:       c3                      ret    
+  400665:	eb 01                	jmp    400668 <main+0x3>
+  400667:	b0 55                	mov    al,0x55
+  400669:	eb 01                	jmp    40066c <main+0x7>
+  40066b:	b4 48                	mov    ah,0x48
+  40066d:	89 e5                	mov    ebp,esp
+  40066f:	eb 01                	jmp    400672 <main+0xd>
+  400671:	b4 48                	mov    ah,0x48
+  400673:	83 ec 20             	sub    esp,0x20
+  400676:	eb 01                	jmp    400679 <main+0x14>
+  400678:	b0 89                	mov    al,0x89
+  40067a:	7d ec                	jge    400668 <main+0x3>
+  40067c:	eb 01                	jmp    40067f <main+0x1a>
+  40067e:	0c 48                	or     al,0x48
+  400680:	89 75 e0             	mov    DWORD PTR [rbp-0x20],esi
+  400683:	eb 01                	jmp    400686 <main+0x21>
+  400685:	0c c7                	or     al,0xc7
+  400687:	45 fc                	rex.RB cld    
+  400689:	2f                   	(bad)  
+  40068a:	d3 23                	shl    DWORD PTR [rbx],cl
+  40068c:	00 eb                	add    bl,ch
+  40068e:	01 24 8b             	add    DWORD PTR [rbx+rcx*4],esp
+  400691:	45 fc                	rex.RB cld    
+  400693:	eb 01                	jmp    400696 <main+0x31>
+  400695:	b4 89                	mov    ah,0x89
+  400697:	c7                   	(bad)  
+  400698:	eb 01                	jmp    40069b <main+0x36>
+  40069a:	b0 e8                	mov    al,0xe8
+  40069c:	44 fe                	rex.R (bad)  
+  40069e:	ff                   	(bad)  
+  40069f:	ff eb                	jmp    <internal disassembler error>
+  4006a1:	01 b4 89 45 fc eb 01 	add    DWORD PTR [rcx+rcx*4+0x1ebfc45],esi
+  4006a8:	b0 b8                	mov    al,0xb8
+  4006aa:	fc                   	cld    
+  4006ab:	07                   	(bad)  
+  4006ac:	40 00 eb             	add    bl,bpl
+  4006af:	01 24 8b             	add    DWORD PTR [rbx+rcx*4],esp
+  4006b2:	55                   	push   rbp
+  4006b3:	fc                   	cld    
+  4006b4:	eb 01                	jmp    4006b7 <main+0x52>
+  4006b6:	b0 89                	mov    al,0x89
+  4006b8:	d6                   	(bad)  
+  4006b9:	eb 01                	jmp    4006bc <main+0x57>
+  4006bb:	b0 48                	mov    al,0x48
+  4006bd:	89 c7                	mov    edi,eax
+  4006bf:	eb 01                	jmp    4006c2 <main+0x5d>
+  4006c1:	0c b8                	or     al,0xb8
+  4006c3:	00 00                	add    BYTE PTR [rax],al
+  4006c5:	00 00                	add    BYTE PTR [rax],al
+  4006c7:	eb 01                	jmp    4006ca <main+0x65>
+  4006c9:	b0 e8                	mov    al,0xe8
+  4006cb:	11 fd                	adc    ebp,edi
+  4006cd:	ff                   	(bad)  
+  4006ce:	ff eb                	jmp    <internal disassembler error>
+  4006d0:	01 b4 83 45 fc 04 eb 	add    DWORD PTR [rbx+rax*4-0x14fb03bb],esi
+  4006d7:	01 b4 b8 0e 08 40 00 	add    DWORD PTR [rax+rdi*4+0x40080e],esi
+  4006de:	eb 01                	jmp    4006e1 <main+0x7c>
+  4006e0:	24 8b                	and    al,0x8b
+  4006e2:	55                   	push   rbp
+  4006e3:	fc                   	cld    
+  4006e4:	eb 01                	jmp    4006e7 <main+0x82>
+  4006e6:	b0 89                	mov    al,0x89
+  4006e8:	d6                   	(bad)  
+  4006e9:	eb 01                	jmp    4006ec <main+0x87>
+  4006eb:	0c 48                	or     al,0x48
+  4006ed:	89 c7                	mov    edi,eax
+  4006ef:	eb 01                	jmp    4006f2 <main+0x8d>
+  4006f1:	0c b8                	or     al,0xb8
+  4006f3:	00 00                	add    BYTE PTR [rax],al
+  4006f5:	00 00                	add    BYTE PTR [rax],al
+  4006f7:	eb 01                	jmp    4006fa <main+0x95>
+  4006f9:	24 e8                	and    al,0xe8
+  4006fb:	e1 fc                	loope  4006f9 <main+0x94>
+  4006fd:	ff                   	(bad)  
+  4006fe:	ff eb                	jmp    <internal disassembler error>
+  400700:	01 b0 c9 eb 01 b4    	add    DWORD PTR [rax-0x4bfe1437],esi
+  400706:	c3                   	ret    
+

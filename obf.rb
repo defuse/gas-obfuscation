@@ -28,12 +28,13 @@ lines = File.open( INPUT_FILE, "r" ) do |f|
 end
 
 OBFUSCATORS = [
-  # These are instruction prefixes...
-  "\x05".b,                     # ADD EAX, <imm32>
-  "\x81\xC3".b,                 # ADD EBX, <imm32>
-  "\x31".b,                     # XOR
-  "\xF7".b,                     # MUL
-  "\x0D".b,                     # OR EAX, <imm32>
+  # These are instruction prefixes. They all make the disassembler expect the
+  # next byte(s) (the first byte(s) of the actual instruction) to be part of
+  # this instruction.
+  "\xB0".b,                     # MOV AL, <imm8>
+  "\xB4".b,                     # MOV AH, <imm8>
+  "\x0C".b,                     # OR AL, <imm8>
+  "\x24".b,                     # AND AL, <imm8>
   # You can add more, or even mine them from existing binaries...
 ]
 
