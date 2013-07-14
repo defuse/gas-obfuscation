@@ -24,7 +24,7 @@ starts right after the jump instruction (at 0xBO), which is the opcode for:
 
     MOV AL, <imm8>
 
-The disassembler expects an 1-byte immidate operand after the 0xB0, so it
+The disassembler expects a 1-byte immidate operand after the 0xB0, so it
 interprets the 0x55 (the actual instruction) as an operand to the MOV.
 
 Example Output
