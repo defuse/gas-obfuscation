@@ -58,7 +58,7 @@ lines.each do |line|
       # it's an instruction (i think!), so insert obfuscator
       obf = OBFUSCATORS[rand(OBFUSCATORS.length)]
                 # unconditional jump over the instruction prefix
-      output << ".byte 0xEB, 0x#{obf.length.to_s(16)}, " +
+      output << ".byte 0xEB, #{obf.length}, " +
                 # the instruction prefix
                 obf.split('').map { |b| b.ord }.join(', ') + "\n"
       output << line
