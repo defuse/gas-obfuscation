@@ -41,22 +41,22 @@ OBFUSCATORS = [
 output = []
 
 lines.each do |line|
-    if /^\s*\./ =~ line || /:$/ =~ line
-      # it's a dot thing or label, ignore
-      output << line
-    elsif /^*.*\s=\s.*$/ =~ line
-      # it's something like "Lset9 = Ltmp2-Leh_func_begin2" ignore it
-    elsif /^\s*$/ =~ line
-      # blank line, ignore it
-    else 
-      # it's an instruction (i think!), so insert obfuscator
-      obf = OBFUSCATORS[rand(OBFUSCATORS.length)]
-                # unconditional jump over the instruction prefix
-      output << ".byte 0xEB, #{obf.length}, " +
-                # the instruction prefix
-                obf.split('').map { |b| b.ord }.join(', ') + "\n"
-      output << line
-    end
+  if /^\s*\./ =~ line || /:$/ =~ line
+    # it's a dot thing or label, ignore
+    output << line
+  elsif /^*.*\s=\s.*$/ =~ line
+    # it's something like "Lset9 = Ltmp2-Leh_func_begin2" ignore it
+  elsif /^\s*$/ =~ line
+    # blank line, ignore it
+  else 
+    # it's an instruction (i think!), so insert obfuscator
+    obf = OBFUSCATORS[rand(OBFUSCATORS.length)]
+              # unconditional jump over the instruction prefix
+    output << ".byte 0xEB, #{obf.length}, " +
+              # the instruction prefix
+              obf.split('').map { |b| b.ord }.join(', ') + "\n"
+    output << line
+  end
 end
 
 print output.join('');
