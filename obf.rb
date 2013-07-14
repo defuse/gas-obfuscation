@@ -40,21 +40,14 @@ OBFUSCATORS = [
 
 output = []
 
-STATE_WAITING_FOR_TEXT = 0
-STATE_OBFUSCATING = 1
-state = STATE_WAITING_FOR_TEXT
-
 lines.each do |line|
-  case state
-  when STATE_WAITING_FOR_TEXT
-    if /^\s*\.text$/ =~ line
-      state = STATE_OBFUSCATING
-    end
-    output << line
-  when STATE_OBFUSCATING
     if /^\s*\./ =~ line || /:$/ =~ line
       # it's a dot thing or label, ignore
       output << line
+    elsif /^*.*\s=\s.*$/ =~ line
+      # it's something like "Lset9 = Ltmp2-Leh_func_begin2" ignore it
+    elsif /^\s*$/ =~ line
+      # blank line, ignore it
     else 
       # it's an instruction (i think!), so insert obfuscator
       obf = OBFUSCATORS[rand(OBFUSCATORS.length)]
@@ -64,7 +57,6 @@ lines.each do |line|
                 obf.split('').map { |b| b.ord }.join(', ') + "\n"
       output << line
     end
-  end
 end
 
 print output.join('');
