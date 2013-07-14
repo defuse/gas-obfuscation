@@ -1,9 +1,31 @@
 gas-obfuscation
 ===============
 
-Extremely simple but inefficient x86-64 assembly obfuscation.
+This script modifies GNU assembly files (.s) to confuse linear sweep
+disassemblers like objdump. It does not confuse recursive traversal
+disassemblers like IDA Pro. It is very inefficient, making simple code about 2x
+slower.
 
-Look at obf.rb to see how it works. Run that script on GAS assembly (.s) files.
+How It Works
+===============
+
+The script inserts a byte sequence before each instruction in the file. The byte
+sequences are designed to confuse the disassembler. For example, the instruction
+"PUSH RBP" assembles to 0x55. If we insert the bytes 0xEB, 0x01, 0xB0 before it,
+we get 0xEB, 0x01, 0xB0, 0x55, which disassembles to:
+
+    400665:	eb 01                	jmp    400668 <main+0x3>
+    400667:	b0 55                	mov    al,0x55
+
+What's really going on is that 0xEB, 0x01 is the instruction "Jump over the next
+byte", which causes execution to continue from 0x55 (PUSH RBP). But linear sweep
+disassemblers don't look at control flow. They assume that the next instruction
+starts right after the jump instruction (at 0xBO), which is the opcode for:
+
+    MOV AL, <imm8>
+
+The disassembler expects an 1-byte immidate operand after the 0xB0, so it
+interprets the 0x55 (the actual instruction) as an operand to the MOV.
 
 Example Output
 ----------------
